@@ -1,7 +1,6 @@
 package level_ip
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -10,7 +9,7 @@ func handleFrame(dev *NetDev, eth_hdr *EthHdr, ifce *TunInterface) {
 	case ETH_P_ARP:
 		arpIncoming(dev, eth_hdr, ifce)
 	case ETH_P_IP:
-		fmt.Println("Found IPv4")
+		ipv4_incoming(dev, eth_hdr, ifce)
 	default:
 	}
 }
