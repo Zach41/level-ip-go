@@ -30,7 +30,7 @@ func (netdev *NetDev) transimit(eth_hdr *EthHdr,
 	eth_hdr.ethertype = ethertype
 	eth_hdr.payload = payloadFrame.encode()
 
-	DPrintf("Transimit ETH FRAME\n%s\n", hexdump(eth_hdr.encode()))
+	// DPrintf("Transimit ETH FRAME\n%s\n", hexdump(eth_hdr.encode()))
 
 	// TODO: Serialize Ethernet Frame
 	_, err := ifce.Write(eth_hdr.encode())

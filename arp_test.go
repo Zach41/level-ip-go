@@ -17,7 +17,7 @@ func handleFrame(dev *NetDev, eth_hdr *EthHdr, ifce *TunInterface) {
 func TestArp(t *testing.T) {
 	dev := netdevInit("10.0.0.4", "00:0c:29:6d:50:25")
 
-	ifce, err := tunInit("")
+	ifce, err := tunInit("test")
 	if err != nil {
 		t.Fatalf("Creating Tap Err: %v\n", err)
 	}

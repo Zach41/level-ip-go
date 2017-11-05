@@ -9,7 +9,7 @@ import (
 	"unsafe"
 )
 
-const Debug = 0
+const Debug = 1
 
 func DPrintf(str string, a ...interface{}) {
 	if Debug > 0 {

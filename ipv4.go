@@ -6,6 +6,8 @@ import (
 
 const (
 	IPV4 uint8 = 0x04
+
+	IPV4_TCP = 0x06
 )
 
 type IPHdr struct {
@@ -95,6 +97,8 @@ func ipv4_incoming(netdev *NetDev, eth_hdr *EthHdr, ifce *TunInterface) {
 	switch ip_hdr.proto {
 	case ICMPV4:
 		icmp_incoming(netdev, eth_hdr, ip_hdr, ifce)
+	case IPV4_TCP:
+		tcp_incoming(netdev, eth_hdr, ip_hdr, ifce)
 	default:
 		DPrintf("IP Datagram's protocol: %d\n", ip_hdr.proto)
 	}
