@@ -9,7 +9,7 @@ import (
 	"unsafe"
 )
 
-const Debug = 1
+const Debug = 0
 
 func DPrintf(str string, a ...interface{}) {
 	if Debug > 0 {
@@ -64,26 +64,26 @@ func writeUint32ToNet(v uint32) []byte {
 	return b
 }
 
-func serializeFrameARP(eth_hdr *EthHdr, arp_hdr *ArpHdr, arpdata *ArpIpv4) []byte {
-	buf := make([]byte, 0)
+// func serializeFrameARP(eth_hdr *EthHdr, arp_hdr *ArpHdr, arpdata *ArpIpv4) []byte {
+// 	buf := make([]byte, 0)
 
-	buf = append(buf, eth_hdr.dmac...)
-	buf = append(buf, eth_hdr.smac...)
-	buf = append(buf, writeUint16ToNet(eth_hdr.ethertype)...)
-	buf = append(buf, writeUint16ToNet(arp_hdr.hwtype)...)
-	buf = append(buf, writeUint16ToNet(arp_hdr.protype)...)
-	buf = append(buf, arp_hdr.hwsize)
-	buf = append(buf, arp_hdr.prosize)
-	buf = append(buf, writeUint16ToNet(arp_hdr.opcode)...)
-	buf = append(buf, arpdata.smac...)
-	buf = append(buf, arpdata.sip...)
-	buf = append(buf, arpdata.dmac...)
-	buf = append(buf, arpdata.dip...)
+// 	buf = append(buf, eth_hdr.dmac...)
+// 	buf = append(buf, eth_hdr.smac...)
+// 	buf = append(buf, writeUint16ToNet(eth_hdr.ethertype)...)
+// 	buf = append(buf, writeUint16ToNet(arp_hdr.hwtype)...)
+// 	buf = append(buf, writeUint16ToNet(arp_hdr.protype)...)
+// 	buf = append(buf, arp_hdr.hwsize)
+// 	buf = append(buf, arp_hdr.prosize)
+// 	buf = append(buf, writeUint16ToNet(arp_hdr.opcode)...)
+// 	buf = append(buf, arpdata.smac...)
+// 	buf = append(buf, arpdata.sip...)
+// 	buf = append(buf, arpdata.dmac...)
+// 	buf = append(buf, arpdata.dip...)
 
-	return buf
-}
+// 	return buf
+// }
 
-func print_hexdump(data []byte) string {
+func hexdump(data []byte) string {
 	ret := ""
 	for idx, b := range data {
 		if idx > 0 && idx%8 == 0 {

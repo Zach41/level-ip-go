@@ -16,14 +16,27 @@ type EthHdr struct {
 	payload   []byte
 }
 
-func initEthHdr(header []byte) EthHdr {
-	hdr := EthHdr{
-		dmac:    header[0:6],
-		smac:    header[6:12],
-		payload: header[14:],
-	}
+func (eth_hdr *EthHdr) encode() []byte {
+	b := make([]byte, 0)
+	b = append(b, eth_hdr.dmac...)
+	b = append(b, eth_hdr.smac...)
+	b = append(b, writeUint16ToNet(eth_hdr.ethertype)...)
 
-	hdr.ethertype = readUint16FromNet(header[12:14])
+	b = append(b, eth_hdr.payload...)
+
+	return b
+}
+
+func (eth_hdr *EthHdr) decode(b []byte) {
+	eth_hdr.dmac = b[0:6]
+	eth_hdr.smac = b[6:12]
+	eth_hdr.ethertype = readUint16FromNet(b[12:14])
+	eth_hdr.payload = b[14:]
+}
+
+func initEthHdr(header []byte) *EthHdr {
+	hdr := &EthHdr{}
+	hdr.decode(header)
 
 	return hdr
 }

@@ -28,10 +28,9 @@ func TestArp(t *testing.T) {
 		if _, err := ifce.Read(buf); err != nil {
 			t.Fatalf("ERR: Read from tun_fd: %v\n", err)
 		}
-		// DPrintf("Received A Ethernet Frame.\n")
-		// print_hexdump(buf)
+		// DPrintf("Received A Ethernet Frame.\n%s\n", hexdump(buf))
 		eth_hdr := initEthHdr(buf)
 
-		handleFrame(&dev, &eth_hdr, ifce)
+		handleFrame(&dev, eth_hdr, ifce)
 	}
 }
